@@ -7,5 +7,5 @@ public interface IGame {
     void setPlayerTwo(Player playerTwo);
     void startBattle();
     Player getWinner();
-    List<Pokemon> showPokemons();
+    List<Pokemon> getPokemons();
 }

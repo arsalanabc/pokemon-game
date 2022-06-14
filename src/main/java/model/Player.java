@@ -48,4 +48,8 @@ public class Player {
                 ", name='" + name + '\'' +
                 '}';
     }
+
+    public String getName() {
+        return this.name;
+    }
 }

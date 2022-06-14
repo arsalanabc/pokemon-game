@@ -32,4 +32,16 @@ public class Pokemon {
         this.weight = weight;
         this.height = height;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getWeight() {
+        return weight;
+    }
+
+    public String getHeight() {
+        return height;
+    }
 }

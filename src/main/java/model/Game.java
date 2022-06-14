@@ -24,6 +24,9 @@ public class Game implements IGame {
 
     @Override
     public void startBattle() {
+        if(players[0] == null || players[1]  == null) {
+            throw new NullPointerException("one or both players are missing");
+        }
         Player current = players[0];
         while(true){
             int damage = (int) Math.max(1, Math.round(Math.random()*10) % 10 );
@@ -36,11 +39,14 @@ public class Game implements IGame {
 
     @Override
     public Player getWinner() {
+        if(this.winner  == null) {
+            throw new NullPointerException("Winning player is missing!");
+        }
         return this.winner;
     }
 
     @Override
-    public List<Pokemon> showPokemons() {
+    public List<Pokemon> getPokemons() {
         return this.pokemons;
     }
 
