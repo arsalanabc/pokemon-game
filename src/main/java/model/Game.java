@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Game implements IGame {
-    private List<Pokemon> pokemons;
+    public List<Pokemon> pokemons;
     Player[] players = new Player[2];
     Player winner;
 
-    public Game() {
+    public Game(List<Pokemon> pokemons) {
         this.players = new Player[2];
-        this.pokemons = new ArrayList<Pokemon>();
+        this.pokemons = pokemons;
     }
 
     @Override
