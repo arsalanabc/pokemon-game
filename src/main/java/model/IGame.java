@@ -3,9 +3,9 @@ package model;
 import java.util.List;
 
 public interface IGame {
-    void setPlayerOne();
-    void setPlayerTwo();
-    void startGame();
+    void setPlayerOne(Player playerOne);
+    void setPlayerTwo(Player playerTwo);
+    void startBattle();
     Player getWinner();
     List<Pokemon> showPokemons();
 }

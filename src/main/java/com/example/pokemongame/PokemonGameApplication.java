@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Game;
+import model.Player;
 import model.Pokemon;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,7 +25,7 @@ public class PokemonGameApplication {
 
 		System.out.println("this is a test");
 		RestTemplate restTemplate = new RestTemplate();
-		for (int i = 1; i <= 50; i++) {
+		for (int i = 1; i <= 5; i++) {
 			String result = restTemplate.getForObject("https://pokeapi.co/api/v2/pokemon/"+ i, String.class);
 			ObjectMapper objectMapper = new ObjectMapper();
 			Pokemon pokemon = objectMapper.readValue(result, Pokemon.class);
@@ -32,6 +33,13 @@ public class PokemonGameApplication {
 		}
 		Game game = new Game(pokemons);
 		game.showPokemons().forEach(System.out::println);
+		game.setPlayerOne(new Player("player_1", pokemons.get(0)));
+		game.setPlayerTwo(new Player("player_2", pokemons.get(1)));
+
+		game.startBattle();
+		Player player = game.getWinner();
+		System.out.println(player);
+
 
 		SpringApplication.run(PokemonGameApplication.class, args);
 	}

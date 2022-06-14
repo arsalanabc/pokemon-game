@@ -1,8 +1,7 @@
 package model;
 
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Game implements IGame {
     public List<Pokemon> pokemons;
@@ -10,28 +9,34 @@ public class Game implements IGame {
     Player winner;
 
     public Game(List<Pokemon> pokemons) {
-        this.players = new Player[2];
         this.pokemons = pokemons;
     }
 
     @Override
-    public void setPlayerOne() {
-
+    public void setPlayerOne(Player player) {
+        this.players[0] = player;
     }
 
     @Override
-    public void setPlayerTwo() {
-
+    public void setPlayerTwo(Player player) {
+        this.players[1] = player;
     }
 
     @Override
-    public void startGame() {
-
+    public void startBattle() {
+        Player current = players[0];
+        while(true){
+            int damage = (int) Math.max(1, Math.round(Math.random()*10) % 10 );
+            current.damage(damage);
+            if(current.isDead()) break;
+            current = current == players[0]? players[1]: players[0];
+        }
+        this.winner = players[0].isDead()? players[1]: players[0];;
     }
 
     @Override
     public Player getWinner() {
-        return null;
+        return this.winner;
     }
 
     @Override
