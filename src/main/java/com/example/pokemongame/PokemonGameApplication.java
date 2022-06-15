@@ -1,18 +1,13 @@
 package com.example.pokemongame;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Game;
 import model.Player;
 import model.Pokemon;
-import org.springframework.boot.SpringApplication;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriBuilder;
+import service.PokemonService;
 
-import javax.crypto.spec.PSource;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -21,17 +16,10 @@ import java.util.Scanner;
 @SpringBootApplication
 public class PokemonGameApplication {
 
-	public static void main(String[] args) throws JsonProcessingException {
+	public static void main(String[] args) {
+		PokemonService pokemonService = new PokemonService("https://pokeapi.co/api/v2/pokemon/");
+		List<Pokemon> pokemons = pokemonService.fetchPokemons();
 
-		List<Pokemon> pokemons = new ArrayList<>();
-
-		RestTemplate restTemplate = new RestTemplate();
-		for (int i = 1; i <= 5; i++) {
-			String result = restTemplate.getForObject("https://pokeapi.co/api/v2/pokemon/"+ i, String.class);
-			ObjectMapper objectMapper = new ObjectMapper();
-			Pokemon pokemon = objectMapper.readValue(result, Pokemon.class);
-			pokemons.add(pokemon);
-		}
 		Game game = new Game(pokemons);
 		showMenu();
 
