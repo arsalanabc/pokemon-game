@@ -1,22 +1,21 @@
-package service;
+package pokemongame.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.Pokemon;
-import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
+import pokemongame.model.Pokemon;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
-public class PokemonService {
+public class PokemonServer {
     String serverUrl;
     List<Pokemon> pokemons;
     int POKEMON_COUNT = 5;
 
-    public PokemonService(String serverUrl){
+    public PokemonServer(String serverUrl){
         this.serverUrl = serverUrl;
         this.pokemons = new ArrayList<>();
     }

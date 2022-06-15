@@ -1,4 +1,4 @@
-package model;
+package pokemongame.model;
 
 import java.util.Objects;
 
