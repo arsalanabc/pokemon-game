@@ -32,7 +32,6 @@ public class Game implements IGame {
         Player currentPlayer = players[0];
 
         for (int i = 1; i < GAME_ROUNDS+1; i++) {
-            if(winnerList.contains(this.winner)){break;}
             System.out.println("ROUND - "+i);
             Arrays.stream(players).forEach(Player::revive);
 
@@ -44,8 +43,9 @@ public class Game implements IGame {
                 winnerList.add(currentPlayer);
             }
             this.winner = players[0].isDead()? players[1]: players[0];
-            winnerList.add(this.winner);
             System.out.println("The winner is "+this.winner.getName());
+            if(winnerList.contains(this.winner)){break;}
+            winnerList.add(this.winner);
         }
 
     }
