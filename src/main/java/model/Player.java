@@ -25,14 +25,16 @@ public class Player {
         return this.health <= 0;
     }
 
+   public String getName() {
+        return this.name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Player player = (Player) o;
-        return health == player.health &&
-                Objects.equals(name, player.name) &&
-                Objects.equals(pokemon, player.pokemon);
+        return health == player.health && Objects.equals(name, player.name) && Objects.equals(pokemon, player.pokemon);
     }
 
     @Override
@@ -43,13 +45,9 @@ public class Player {
     @Override
     public String toString() {
         return "Player{" +
-                "pokemon=" + pokemon +
+                "name='" + name + '\'' +
+                ", pokemon=" + pokemon +
                 ", health=" + health +
-                ", name='" + name + '\'' +
                 '}';
-    }
-
-    public String getName() {
-        return this.name;
     }
 }

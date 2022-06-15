@@ -27,7 +27,7 @@ public class Game implements IGame {
         if(players[0] == null || players[1]  == null) {
             throw new NullPointerException("one or both players are missing");
         }
-        Set<Player> winnerList = new HashSet<>();
+        Set<String> winnerList = new HashSet<>();
 
         Player currentPlayer = players[0];
 
@@ -36,18 +36,16 @@ public class Game implements IGame {
             Arrays.stream(players).forEach(Player::revive);
 
             while(true){
-                int damage = (int) Math.max(1, Math.round(Math.random()*10) % 10 );
+                int damage = (int) Math.max(1, Math.round(Math.random()*10) % 10 ); // Random damage between 1 and 10
                 currentPlayer.damage(damage);
                 if(currentPlayer.isDead()) break;
-                currentPlayer = currentPlayer == players[0]? players[1]: players[0];
-                winnerList.add(currentPlayer);
+                currentPlayer = currentPlayer.equals(players[0])? players[1]: players[0];
             }
             this.winner = players[0].isDead()? players[1]: players[0];
             System.out.println("The winner is "+this.winner.getName());
-            if(winnerList.contains(this.winner)){break;}
-            winnerList.add(this.winner);
+            if(winnerList.contains(this.winner.getName())){break;}
+            winnerList.add(this.winner.getName());
         }
-
     }
 
     @Override
