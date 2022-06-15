@@ -3,10 +3,10 @@ package model;
 import java.util.Objects;
 
 public class Player {
+    private static final int DEFAULT_HEALTH = 20;
     public String name;
     public Pokemon pokemon;
-    public int health = 10;
-    private boolean isDeath = false;
+    public int health = DEFAULT_HEALTH;
 
     public Player(String name, Pokemon pokemon) {
         this.name = name;
@@ -15,13 +15,14 @@ public class Player {
 
     void damage(int damage){
         this.health -= damage;
-        if(this.health < 0){
-            this.isDeath = true;
-        }
+    }
+
+    void revive(){
+        this.health = DEFAULT_HEALTH;
     }
 
     public boolean isDead(){
-        return this.isDeath;
+        return this.health <= 0;
     }
 
     @Override
@@ -30,14 +31,13 @@ public class Player {
         if (o == null || getClass() != o.getClass()) return false;
         Player player = (Player) o;
         return health == player.health &&
-                isDeath == player.isDeath &&
                 Objects.equals(name, player.name) &&
                 Objects.equals(pokemon, player.pokemon);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, pokemon, health, isDeath);
+        return Objects.hash(name, pokemon, health);
     }
 
     @Override

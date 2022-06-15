@@ -1,9 +1,9 @@
 package model;
 
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Game implements IGame {
+    private static final int GAME_ROUNDS = 3;
     public List<Pokemon> pokemons;
     Player[] players = new Player[2];
     Player winner;
@@ -27,14 +27,27 @@ public class Game implements IGame {
         if(players[0] == null || players[1]  == null) {
             throw new NullPointerException("one or both players are missing");
         }
-        Player current = players[0];
-        while(true){
-            int damage = (int) Math.max(1, Math.round(Math.random()*10) % 10 );
-            current.damage(damage);
-            if(current.isDead()) break;
-            current = current == players[0]? players[1]: players[0];
+        Set<Player> winnerList = new HashSet<>();
+
+        Player currentPlayer = players[0];
+
+        for (int i = 1; i < GAME_ROUNDS+1; i++) {
+            if(winnerList.contains(this.winner)){break;}
+            System.out.println("ROUND - "+i);
+            Arrays.stream(players).forEach(Player::revive);
+
+            while(true){
+                int damage = (int) Math.max(1, Math.round(Math.random()*10) % 10 );
+                currentPlayer.damage(damage);
+                if(currentPlayer.isDead()) break;
+                currentPlayer = currentPlayer == players[0]? players[1]: players[0];
+                winnerList.add(currentPlayer);
+            }
+            this.winner = players[0].isDead()? players[1]: players[0];
+            winnerList.add(this.winner);
+            System.out.println("The winner is "+this.winner.getName());
         }
-        this.winner = players[0].isDead()? players[1]: players[0];;
+
     }
 
     @Override
