@@ -4,11 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Pokemon;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class PokemonService {
     String serverUrl;
     List<Pokemon> pokemons;
@@ -19,7 +21,6 @@ public class PokemonService {
         this.pokemons = new ArrayList<>();
     }
 
-    @Bean
     public List<Pokemon> fetchPokemons() {
 
         this.pokemons.clear();

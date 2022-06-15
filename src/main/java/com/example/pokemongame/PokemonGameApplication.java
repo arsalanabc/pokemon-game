@@ -1,11 +1,15 @@
 package com.example.pokemongame;
 
+import config.AppConfig;
 import model.Game;
 import model.Player;
 import model.Pokemon;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import service.PokemonService;
 
 import java.util.ArrayList;
@@ -17,7 +21,9 @@ import java.util.Scanner;
 public class PokemonGameApplication {
 
 	public static void main(String[] args) {
-		PokemonService pokemonService = new PokemonService("https://pokeapi.co/api/v2/pokemon/");
+		ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+		PokemonService  pokemonService = (PokemonService) context.getBean("pokemonService");
+
 		List<Pokemon> pokemons = pokemonService.fetchPokemons();
 
 		Game game = new Game(pokemons);
