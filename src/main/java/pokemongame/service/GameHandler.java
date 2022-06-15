@@ -1,13 +1,10 @@
 package pokemongame.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import pokemongame.config.AppConfig;
+import org.springframework.stereotype.Service;
 import pokemongame.model.Game;
 import pokemongame.model.Player;
 import pokemongame.model.Pokemon;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -20,10 +17,7 @@ public class GameHandler {
     @Autowired
     PokemonServer pokemonService;
     public void StartGame(){
-//        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-//        PokemonService pokemonService = (PokemonService) context.getBean("pokemonService");
-//
-        List<Pokemon> pokemons = pokemonService.fetchPokemons();
+        List<Pokemon> pokemons = pokemonService.getPokemons();
 
         Game game = new Game(pokemons);
         showMenu();

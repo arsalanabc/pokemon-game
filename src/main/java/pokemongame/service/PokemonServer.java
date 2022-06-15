@@ -15,6 +15,10 @@ public class PokemonServer {
     List<Pokemon> pokemons;
     int POKEMON_COUNT = 5;
 
+    public List<Pokemon> getPokemons() {
+        return this.pokemons;
+    }
+
     public PokemonServer(String serverUrl){
         this.serverUrl = serverUrl;
         this.pokemons = new ArrayList<>();
