@@ -21,10 +21,8 @@ public class PokemonGameApplication implements CommandLineRunner {
 	PokemonServer pokemonServer;
 
 	@Override
-	public void run(String ... args) throws Exception{
+	public void run(String ... args) {
 		pokemonServer.fetchPokemons();
 		gameHandler.StartGame();
 	}
-
-
 }
