@@ -24,9 +24,9 @@ class PokemonGameApplicationTests {
 	void shouldKillPlayer() {
 
 		Player player = new Player("test", new Pokemon());
-		assert player.isDead() == false;
-		player.damage(100);
-		assert player.isDead() == true;
+		assert player.getPokemon().isDead() == false;
+		player.getPokemon().damage(100);
+		assert player.getPokemon().isDead() == true;
 	}
 
 	@Test

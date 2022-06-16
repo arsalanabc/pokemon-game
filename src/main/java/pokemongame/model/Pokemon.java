@@ -3,8 +3,11 @@ package pokemongame.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Pokemon {
+    private static final int DEFAULT_HEALTH = 20;
+
     @JsonProperty("name")
     public String name;
 
@@ -14,7 +17,22 @@ public class Pokemon {
     @JsonProperty("height")
     public String height;
 
+    private int health = DEFAULT_HEALTH;
+
+
     public Pokemon() {
+    }
+
+    void revive(){
+        this.health = DEFAULT_HEALTH;
+    }
+
+    public void damage(int damage){
+        this.health -= damage;
+    }
+
+    public boolean isDead(){
+        return this.health <= 0;
     }
 
     @Override

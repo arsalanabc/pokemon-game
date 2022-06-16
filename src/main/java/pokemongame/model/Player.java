@@ -3,30 +3,32 @@ package pokemongame.model;
 import java.util.Objects;
 
 public class Player {
-    private static final int DEFAULT_HEALTH = 20;
     public String name;
-    public Pokemon pokemon;
-    public int health = DEFAULT_HEALTH;
+    private Pokemon pokemon;
 
     public Player(String name, Pokemon pokemon) {
         this.name = name;
         this.pokemon = pokemon;
     }
 
-    public void damage(int damage){
-        this.health -= damage;
-    }
-
     void revive(){
-        this.health = DEFAULT_HEALTH;
+        this.pokemon.revive();
     }
 
-    public boolean isDead(){
-        return this.health <= 0;
-    }
-
-   public String getName() {
+    public String getName() {
         return this.name;
+    }
+    public Pokemon getPokemon() {
+        return this.pokemon;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                ", pokemon=" + pokemon +
+                '}';
     }
 
     @Override
@@ -34,20 +36,11 @@ public class Player {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Player player = (Player) o;
-        return health == player.health && Objects.equals(name, player.name) && Objects.equals(pokemon, player.pokemon);
+        return Objects.equals(name, player.name) && Objects.equals(pokemon, player.pokemon);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, pokemon, health);
-    }
-
-    @Override
-    public String toString() {
-        return "Player{" +
-                "name='" + name + '\'' +
-                ", pokemon=" + pokemon +
-                ", health=" + health +
-                '}';
+        return Objects.hash(name, pokemon);
     }
 }

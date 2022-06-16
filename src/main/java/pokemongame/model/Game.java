@@ -37,11 +37,11 @@ public class Game implements IGame {
 
             while(true){
                 int damage = (int) Math.max(1, Math.round(Math.random()*10) % 10 ); // Random damage between 1 and 10
-                currentPlayer.damage(damage);
-                if(currentPlayer.isDead()) break;
+                currentPlayer.getPokemon().damage(damage);
+                if(currentPlayer.getPokemon().isDead()) break;
                 currentPlayer = currentPlayer.equals(players[0])? players[1]: players[0];
             }
-            this.winner = players[0].isDead()? players[1]: players[0];
+            this.winner = players[0].getPokemon().isDead()? players[1]: players[0];
             System.out.println("The winner is "+this.winner.getName());
             if(winnerList.contains(this.winner.getName())){break;}
             winnerList.add(this.winner.getName());
