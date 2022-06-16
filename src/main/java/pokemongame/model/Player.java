@@ -13,7 +13,7 @@ public class Player {
         this.pokemon = pokemon;
     }
 
-    void damage(int damage){
+    public void damage(int damage){
         this.health -= damage;
     }
 
