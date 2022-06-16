@@ -19,4 +19,4 @@ To run with mvn:
 To run with java:
 
     mvn clean package
-    java -jar .\target\pokemon-game-0.0.1-SNAPSHOT.war
+    java -jar .\target\pokemon-game.war

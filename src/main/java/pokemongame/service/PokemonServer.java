@@ -13,7 +13,7 @@ import java.util.List;
 public class PokemonServer {
     String serverUrl;
     List<Pokemon> pokemons;
-    int POKEMON_COUNT = 5;
+    int POKEMON_COUNT = 50;
 
     public List<Pokemon> getPokemons() {
         return this.pokemons;
