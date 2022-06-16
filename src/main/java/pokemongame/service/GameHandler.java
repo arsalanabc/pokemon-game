@@ -6,6 +6,7 @@ import pokemongame.model.Game;
 import pokemongame.model.Player;
 import pokemongame.model.Pokemon;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -36,35 +37,11 @@ public class GameHandler {
                         break;
                     case 2:
                         System.out.println("Pick a Pokemon for player one!");
-                        while(true){
-                            showPokemons(game);
-                            int i = scanner.nextInt();
-                            if(i < 0 || i >= game.getPokemons().size()) {
-                                System.out.println("Invalid Pokemon. Please pick again!");
-                            } else {
-                                Pokemon p = game.getPokemons().get(i);
-                                Player player1 = new Player("player_1", p);
-                                game.setPlayerOne(player1);
-                                System.out.println(p.getName()+" is picked for "+player1.getName());
-                                break;
-                            }
-                        }
+                        setAPlayer(game, scanner, "player-1", 1);
                         break;
                     case 3:
                         System.out.println("Pick a Pokemon for player two!");
-                        while(true){
-                            showPokemons(game);
-                            int i = scanner.nextInt();
-                            if(i < 0 || i >= game.getPokemons().size()) {
-                                System.out.println("Invalid Pokemon. Please pick again!");
-                            } else {
-                                Pokemon p = game.getPokemons().get(i);
-                                Player player = new Player("player_2", p);
-                                game.setPlayerTwo(player);
-                                System.out.println(p.getName()+" is picked for "+player.getName());
-                                break;
-                            }
-                        }
+                        setAPlayer(game, scanner, "player-2", 2);
                         break;
                     case 4:
                         try {
@@ -94,6 +71,26 @@ public class GameHandler {
 
             } catch (InputMismatchException e) {
                 System.out.println("Invalid entry");
+            }
+        }
+    }
+
+    private void setAPlayer(Game game, Scanner scanner, String playerName, int playerNumber) {
+        while(true){
+            showPokemons(game);
+            int i = scanner.nextInt();
+            if(i < 0 || i >= game.getPokemons().size()) {
+                System.out.println("Invalid Pokemon. Please pick again!");
+            } else {
+                Pokemon p = game.getPokemons().get(i);
+                Player player = new Player(playerName, p);
+                if (playerNumber == 1) {
+                    game.setPlayerOne(player);
+                } else {
+                    game.setPlayerTwo(player);
+                }
+                System.out.println(p.getName()+" is picked for "+player.getName());
+                break;
             }
         }
     }
