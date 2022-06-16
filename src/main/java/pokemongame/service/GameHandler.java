@@ -1,6 +1,8 @@
 package pokemongame.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import pokemongame.model.Game;
 import pokemongame.model.Player;
@@ -14,9 +16,12 @@ import java.util.Scanner;
 
 @Service
 public class GameHandler {
+    @Autowired
+    ApplicationContext applicationContext;
 
     @Autowired
     PokemonServer pokemonService;
+
     public void StartGame(){
         List<Pokemon> pokemons = pokemonService.getPokemons();
 
@@ -73,6 +78,7 @@ public class GameHandler {
                 System.out.println("Invalid entry");
             }
         }
+        exitGame(0);
     }
 
     private void setAPlayer(Game game, Scanner scanner, String playerName, int playerNumber) {
@@ -120,4 +126,7 @@ public class GameHandler {
         System.out.println("\n");
     }
 
+    public void exitGame(int returnCode){
+        SpringApplication.exit(applicationContext, () -> returnCode);
+    }
 }
